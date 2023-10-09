@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Anime;
 use App\Models\Manga;
 use App\Models\Movie;
-
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -38,6 +38,10 @@ class DatabaseSeeder extends Seeder
         //     "hari_rilis" => "1999-05-1",
         //     "deskripsi" => "asdfasfasdfawre",
         // ]);
+        User::create([
+            "username" => "admin",
+            "password" => bcrypt("admin123")
+        ]);
         Anime::factory()->count(50)->create();
         Manga::factory()->count(50)->create();
         Movie::factory()->count(50)->create();

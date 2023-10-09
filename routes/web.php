@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,9 +38,13 @@ use Inertia\Inertia;
 
 // require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return Inertia::render('SplashScreen');
-});
+// Route::get('/', function () {
+//     return Inertia::render('SplashScreen');
+// });
+
+Route::get('/login', [AdminController::class, 'showLoginForm']);
+Route::post('/login', [AdminController::class, 'login']);
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/ongoing-anime', [HomeController::class, "ongoing_anime"]);
 Route::get('/anime-list', [HomeController::class, "anime_list"]);
