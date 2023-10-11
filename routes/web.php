@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,8 +43,11 @@ use Inertia\Inertia;
 //     return Inertia::render('SplashScreen');
 // });
 
-Route::get('/login', [AdminController::class, 'showLoginForm']);
-Route::post('/login', [AdminController::class, 'login']);
+Route::get('/login', [LoginController::class, 'showLoginForm']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/admin/dashboard', [AdminController::class, 'index']);
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/ongoing-anime', [HomeController::class, "ongoing_anime"]);

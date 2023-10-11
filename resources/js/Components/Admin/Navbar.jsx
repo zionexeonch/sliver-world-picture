@@ -1,60 +1,69 @@
-import React from "react";
+import { Link, router } from "@inertiajs/react";
+import React, { useEffect, useState } from "react";
+import Sidebar from "./Sidebar";
 
 export default function Navbar() {
-    // const [sidebarOpen, setSidebarOpen] = useState(false);
-    // const { url } = usePage();
+    const [isOpen, setIsOpen] = useState(false);
 
-    // const toggleSidebar = () => {
-    //     setSidebarOpen(!sidebarOpen);
-    // };
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen);
+    };
 
-    // const links = [
-    //     { href: "/manga", label: "Manga" },
-    //     { href: "/complete-anime", label: "Complete Anime" },
-    //     { href: "#", label: "Release Schedule" },
-    //     { href: "#", label: "Contact" },
-    // ];
+    const handleLogout = () => {
+        router.post("/logout");
+    };
+    useEffect(() => {
+        const timeout = setTimeout(handleLogout, 600000); // Logout otomatis setelah 10 menit (600 detik)
+        return () => clearTimeout(timeout);
+    }, []);
 
     return (
         <>
-            <nav
-                aria-label="menu nav"
-                className="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0"
-            >
-                <div className="flex flex-wrap items-center">
-                    <div className="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
-                        <div href="#" aria-label="Home">
-                            <h1 className="font-bold text-1xl md:text-2xl pl-2">
-                                Admin | Silver Wolrd Pictures
-                            </h1>
-                        </div>
-                    </div>
-
-                    <div className="flex md:w-1/3 justify-center md:justify-start text-white px-2">
-                        <span className="relative w-full">
-                            <input
-                                aria-label="search"
-                                type="search"
-                                id="search"
-                                placeholder="Search"
-                                className="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal"
-                            />
-                            <div
-                                className="absolute search-icon"
-                                style="top: 1rem; left: .8rem;"
-                            >
-                                <svg
-                                    className="fill-current pointer-events-none text-white w-4 h-4"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                                </svg>
-                            </div>
-                        </span>
+            <div className="bg-gray-800 p-4 text-white">
+                {/* Tombol strip 3 untuk mobile */}
+                <div className="block lg:hidden" onClick={toggleSidebar}>
+                    <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4 6h16M4 12h16m-7 6h7"
+                        ></path>
+                    </svg>
+                </div>
+                <div className="hidden lg:flex justify-between items-center">
+                    {/* Logo atau judul */}
+                    <div className="text-2xl font-bold">Logo</div>
+                    {/* Menu */}
+                    <nav className="space-x-4">
+                        <a href="#" className="hover:text-gray-300">
+                            Menu 1
+                        </a>
+                        <a href="#" className="hover:text-gray-300">
+                            Menu 2
+                        </a>
+                        <a href="#" className="hover:text-gray-300">
+                            Menu 3
+                        </a>
+                    </nav>
+                    <div className="flex justify-end pr-4">
+                        <button
+                            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </button>
                     </div>
                 </div>
-            </nav>
+                {/* Sidebar untuk mobile */}
+                <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+            </div>
         </>
     );
 }

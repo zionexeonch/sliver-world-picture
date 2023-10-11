@@ -8,23 +8,10 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
-    public function showLoginForm()
+    public function index()
     {
-        return Inertia::render('User/Login', [
-            "title" => "Login | Silver World Pictures"
+        return Inertia::render("User/Admin", [
+            "title" => "Dashboard Admin | Silver World Pictures",
         ]);
-    }
-
-    public function login(Request $request)
-    {
-        $credentials = $request->only('username', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // Jika autentikasi berhasil
-            return redirect()->intended('/admin/dashboard');
-        }
-
-        // Jika autentikasi gagal
-        return back()->withErrors(['username' => 'Invalid credentials']);
     }
 }

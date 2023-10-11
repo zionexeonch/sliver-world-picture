@@ -1,18 +1,26 @@
-import React, { useEffect } from "react";
-import Main from "@/Layouts/Home/Main";
-import Aos from "aos";
+import { Head } from "@inertiajs/react";
+import React, { useEffect, useState } from "react";
+import "aos/dist/aos.css";
+import AOS from "aos";
+import Main from "@/Layouts/Admin/Main";
 
-const Index = (props) => {
+const Admin = ({ title }) => {
     useEffect(() => {
-        Aos.refresh();
+        AOS.refresh();
     }, []);
-
     return (
         <>
-            <Head title={props.title} />
+            <Head title={title} />
+            <div className="container mx-auto mt-10">
+                <h1 className="text-2xl font-bold mb-5">
+                    Welcome to Admin Dashboard
+                </h1>
+                <div className="bg-white p-6 rounded shadow-md">
+                    {/* Admin Page Content */}
+                </div>
+            </div>
         </>
     );
 };
-
-Index.layout = (page) => <Main children={page} />;
-export default Index;
+Admin.layout = (page) => <Main children={page} />;
+export default Admin;
