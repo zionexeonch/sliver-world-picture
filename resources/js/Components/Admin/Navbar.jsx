@@ -1,9 +1,11 @@
-import { Link, router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+
+    const { url } = usePage();
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -41,16 +43,51 @@ export default function Navbar() {
                     {/* Logo atau judul */}
                     <div className="text-2xl font-bold">Admin SWP</div>
                     {/* Menu */}
-                    <nav className="space-x-4">
-                        <a href="#" className="hover:text-gray-300">
-                            Menu 1
-                        </a>
-                        <a href="#" className="hover:text-gray-300">
-                            Menu 2
-                        </a>
-                        <a href="#" className="hover:text-gray-300">
-                            Menu 3
-                        </a>
+                    <nav className="flex space-x-4">
+                        <Link
+                            href="/admin/dashboard"
+                            className={
+                                url === "/admin/dashboard"
+                                    ? "active text-white bg-slate-600 rounded block py-2 px-5 font-bold"
+                                    : "text-slate-300 hover:text-white hover:bg-slate-600 block py-2 px-5 font-bold"
+                            }
+                            aria-current="page"
+                        >
+                            Dashboard
+                        </Link>
+                        <Link
+                            href="/admin/anime"
+                            className={
+                                url === "/admin/anime"
+                                    ? "active text-white bg-slate-600 rounded block py-2 px-5 font-bold"
+                                    : "text-slate-300 hover:text-white hover:bg-slate-600 block py-2 px-5 font-bold"
+                            }
+                            aria-current="page"
+                        >
+                            Anime
+                        </Link>
+                        <Link
+                            href="/admin/manga"
+                            className={
+                                url === "/admin/manga"
+                                    ? "active text-white bg-slate-600 rounded block py-2 px-5 font-bold"
+                                    : "text-slate-300 hover:text-white hover:bg-slate-600 block py-2 px-5 font-bold"
+                            }
+                            aria-current="page"
+                        >
+                            Manga
+                        </Link>
+                        <Link
+                            href="/admin/movie"
+                            className={
+                                url === "/admin/movie"
+                                    ? "active text-white bg-slate-600 rounded block py-2 px-5 font-bold"
+                                    : "text-slate-300 hover:text-white hover:bg-slate-600 block py-2 px-5 font-bold"
+                            }
+                            aria-current="page"
+                        >
+                            Movie
+                        </Link>
                     </nav>
                     <div className="flex justify-end pr-4">
                         <button

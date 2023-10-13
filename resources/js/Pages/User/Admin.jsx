@@ -1,9 +1,10 @@
-import { Head, router } from "@inertiajs/react";
-import React, { useEffect, useState } from "react";
+import { Head } from "@inertiajs/react";
+import React, { useEffect } from "react";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import Main from "@/Layouts/Admin/Main";
-import { Chart } from "chart.js";
+import Chart from "chart.js/auto";
+import axios from "axios";
 
 const Admin = ({ title, reports }) => {
     useEffect(() => {
@@ -60,34 +61,37 @@ const Admin = ({ title, reports }) => {
         });
     }, [reports]);
 
-    const generatePDF = () => {
-        const canvas = document.getElementById("myChart");
-        const dataURL = canvas.toDataURL();
-
-        // Tambahkan hari, tanggal, tahun
-        const today = new Date();
-        const formattedDate = today.toLocaleDateString();
-
-        // Kirim data untuk membuat PDF ke backend
-        // Contoh menggunakan Axios
-        axios
-            .post("/generate-pdf", { dataURL, formattedDate })
-            .then((response) => {
-                // Tanggapi respons dari backend (mungkin menampilkan tautan untuk mengunduh PDF)
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    const generatePDF = async () => {
+        const response = await axios.get("/admin/reports");
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "report.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     };
+
     return (
         <>
             <Head title={title} />
-            <div className="container mx-auto mt-10 text-white">
+            <div className="container p-4 lg:my-4 lg:mx-auto text-white">
                 <h1 className="text-2xl font-bold mb-5">
                     Welcome to Admin Dashboard
                 </h1>
-                <canvas id="myChart" width="400" height="200"></canvas>
-                <button onClick={generatePDF}>Generate PDF</button>
+                <canvas
+                    id="myChart"
+                    width="400"
+                    height="200"
+                    className="mb-4"
+                ></canvas>
+                <button
+                    onClick={generatePDF}
+                    className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Generate PDF
+                </button>
             </div>
         </>
     );

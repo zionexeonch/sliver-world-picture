@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('status');
             $table->date('hari_rilis');
             $table->text('deskripsi');
+            $table->json('link_download')->nullable();
             $table->timestamps();
         });
     }

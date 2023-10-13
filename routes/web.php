@@ -48,7 +48,10 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'index']);
-Route::post('/generate-pdf', [AdminController::class, 'generatePDF']);
+Route::get('/admin/anime', [AdminController::class, 'anime']);
+Route::get('/admin/manga', [AdminController::class, 'manga']);
+Route::get('/admin/movie', [AdminController::class, 'movie']);
+Route::post('/admin/reports', [AdminController::class, 'generatePDF']);
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/ongoing-anime', [HomeController::class, "ongoing_anime"]);
