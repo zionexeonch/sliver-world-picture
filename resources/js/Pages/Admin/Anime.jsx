@@ -29,6 +29,8 @@ const TABLE_HEAD = [
     "status",
     "Tanggal Rilis",
     "Sinopsis",
+    "Link Download / Episode",
+    "Link Download Batch",
 ];
 
 const Anime = ({ title }) => {
