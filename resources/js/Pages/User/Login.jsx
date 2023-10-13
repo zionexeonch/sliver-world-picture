@@ -1,4 +1,5 @@
-import { Head, router } from "@inertiajs/react";
+import { ArrowLeftCircleIcon } from "@heroicons/react/20/solid";
+import { Head, Link, router } from "@inertiajs/react";
 import React, { useState } from "react";
 
 export default function Login({ title }) {
@@ -58,6 +59,13 @@ export default function Login({ title }) {
                             Login
                         </button>
                     </form>
+                    <Link
+                        href="/"
+                        className="py-3 w-64 text-xl text-white bg-slate-800 flex items-center justify-center mt-4 rounded-2xl space-x-2"
+                    >
+                        <ArrowLeftCircleIcon className="h-6" />
+                        <span>Kembali</span>
+                    </Link>
                 </div>
                 <div className="w-40 h-40 absolute bg-slate-300 rounded-full top-0 right-12 hidden md:block"></div>
                 <div className="w-20 h-40 absolute bg-slate-300 rounded-full bottom-20 left-10 transform rotate-45 hidden md:block"></div>

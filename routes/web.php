@@ -48,6 +48,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'index']);
+Route::post('/generate-pdf', [AdminController::class, 'generatePDF']);
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/ongoing-anime', [HomeController::class, "ongoing_anime"]);

@@ -19,7 +19,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="bg-gray-800 p-4 text-white">
+            <div className="bg-slate-900 p-4 text-white">
                 {/* Tombol strip 3 untuk mobile */}
                 <div className="block lg:hidden" onClick={toggleSidebar}>
                     <svg
@@ -39,7 +39,7 @@ export default function Navbar() {
                 </div>
                 <div className="hidden lg:flex justify-between items-center">
                     {/* Logo atau judul */}
-                    <div className="text-2xl font-bold">Logo</div>
+                    <div className="text-2xl font-bold">Admin SWP</div>
                     {/* Menu */}
                     <nav className="space-x-4">
                         <a href="#" className="hover:text-gray-300">
