@@ -49,6 +49,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'index']);
 Route::get('/admin/anime', [AdminController::class, 'anime']);
+Route::get('/admin/tambah-anime', [AdminController::class, 'tambah_anime']);
 Route::get('/admin/manga', [AdminController::class, 'manga']);
 Route::get('/admin/movie', [AdminController::class, 'movie']);
 Route::post('/admin/reports', [AdminController::class, 'generatePDF']);

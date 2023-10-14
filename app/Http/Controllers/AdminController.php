@@ -29,6 +29,12 @@ class AdminController extends Controller
             'animes' => $animes
         ]);
     }
+    public function tambah_anime()
+    {
+        return Inertia::render("Admin/TambahAnime", [
+            "title" => "Tambah Anime | Silver World Pictures",
+        ]);
+    }
     public function generatePDF()
     {
         $reports = Report::first();

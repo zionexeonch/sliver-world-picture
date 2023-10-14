@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anime;
 use Illuminate\Http\Request;
 
 class AnimeController extends Controller
@@ -14,51 +15,73 @@ class AnimeController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('anime.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Menyimpan data anime baru ke database
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            // Atur validasi sesuai dengan kebutuhan Anda
+        ]);
+
+        // Simpan data ke database
+        Anime::create([
+            'url_image' => $request->url_image,
+            'judul' => $request->judul,
+            // Lanjutkan dengan atribut-atribut lain
+            'list_download' => [
+                'episode' => $request->list_download_episode,
+                'batch' => $request->list_download_batch,
+            ],
+            'genre' => $request->genre,
+            // Lanjutkan dengan atribut-atribut lain
+        ]);
+
+        return redirect()->route('anime.index')->with('success', 'Anime berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Menampilkan halaman edit anime
+    public function edit($id)
     {
-        //
+        $anime = Anime::findOrFail($id);
+        return view('anime.edit', compact('anime'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Memperbarui data anime di database
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            // Atur validasi sesuai dengan kebutuhan Anda
+        ]);
+
+        // Simpan data ke database
+        $anime = Anime::findOrFail($id);
+        $anime->update([
+            'url_image' => $request->url_image,
+            'judul' => $request->judul,
+            // Lanjutkan dengan atribut-atribut lain
+            'list_download' => [
+                'episode' => $request->list_download_episode,
+                'batch' => $request->list_download_batch,
+            ],
+            'genre' => $request->genre,
+            // Lanjutkan dengan atribut-atribut lain
+        ]);
+
+        return redirect()->route('anime.index')->with('success', 'Anime berhasil diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Menghapus data anime dari database
+    public function destroy($id)
     {
-        //
-    }
+        $anime = Anime::findOrFail($id);
+        $anime->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('anime.index')->with('success', 'Anime berhasil dihapus');
     }
 }
