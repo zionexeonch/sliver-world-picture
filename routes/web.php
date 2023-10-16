@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Application;
@@ -49,10 +50,11 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/admin/dashboard', [AdminController::class, 'index']);
 Route::get('/admin/anime', [AdminController::class, 'anime']);
-Route::get('/admin/tambah-anime', [AdminController::class, 'tambah_anime']);
 Route::get('/admin/manga', [AdminController::class, 'manga']);
 Route::get('/admin/movie', [AdminController::class, 'movie']);
 Route::post('/admin/reports', [AdminController::class, 'generatePDF']);
+
+Route::get('/admin/tambah-anime', [AnimeController::class, 'create']);
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/ongoing-anime', [HomeController::class, "ongoing_anime"]);

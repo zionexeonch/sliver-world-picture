@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anime;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AnimeController extends Controller
 {
@@ -15,9 +16,10 @@ class AnimeController extends Controller
         //
     }
 
+    // Menampilkan halaman tambah anime
     public function create()
     {
-        return view('anime.create');
+        return Inertia::render("Components/Admin/TambahAnime");
     }
 
     // Menyimpan data anime baru ke database
