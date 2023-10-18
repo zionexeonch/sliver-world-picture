@@ -19,71 +19,60 @@ class AnimeController extends Controller
     // Menampilkan halaman tambah anime
     public function create()
     {
-        return Inertia::render("Components/Admin/TambahAnime");
+        return Inertia::render('Components/Admin/TambahAnime');
     }
 
-    // Menyimpan data anime baru ke database
     public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
-            // Atur validasi sesuai dengan kebutuhan Anda
-        ]);
 
-        // Simpan data ke database
-        Anime::create([
-            'url_image' => $request->url_image,
-            'judul' => $request->judul,
-            // Lanjutkan dengan atribut-atribut lain
-            'list_download' => [
-                'episode' => $request->list_download_episode,
-                'batch' => $request->list_download_batch,
-            ],
-            'genre' => $request->genre,
-            // Lanjutkan dengan atribut-atribut lain
-        ]);
+        $anime = new Anime;
+        $anime->judul = $request->judul;
+        $anime->jepang = $request->jepang;
+        // ... (isi atribut lainnya)
+        $anime->download_links = $request->download_links;
+        $anime->genres = $request->genres;
 
-        return redirect()->route('anime.index')->with('success', 'Anime berhasil ditambahkan');
+        // Upload gambar ke Cloudinary dan dapatkan URL
+        if ($request->hasFile('url_image')) {
+            $imagePath = $request->file('url_image')->storeOnCloudinary('images');
+            $anime->url_image = $imagePath->getSecurePath();
+        }
+
+        $anime->save();
+
+        return redirect()->route('animes.index');
     }
 
-    // Menampilkan halaman edit anime
-    public function edit($id)
+    public function edit(Anime $anime)
     {
-        $anime = Anime::findOrFail($id);
-        return view('anime.edit', compact('anime'));
+        return view('animes.edit', compact('anime'));
     }
 
-    // Memperbarui data anime di database
-    public function update(Request $request, $id)
+    public function update(Request $request, Anime $anime)
     {
         // Validasi input
-        $request->validate([
-            // Atur validasi sesuai dengan kebutuhan Anda
-        ]);
 
-        // Simpan data ke database
-        $anime = Anime::findOrFail($id);
-        $anime->update([
-            'url_image' => $request->url_image,
-            'judul' => $request->judul,
-            // Lanjutkan dengan atribut-atribut lain
-            'list_download' => [
-                'episode' => $request->list_download_episode,
-                'batch' => $request->list_download_batch,
-            ],
-            'genre' => $request->genre,
-            // Lanjutkan dengan atribut-atribut lain
-        ]);
+        $anime->judul = $request->judul;
+        $anime->jepang = $request->jepang;
+        // ... (isi atribut lainnya)
+        $anime->download_links = $request->download_links;
+        $anime->genres = $request->genres;
 
-        return redirect()->route('anime.index')->with('success', 'Anime berhasil diperbarui');
+        // Upload gambar ke Cloudinary dan dapatkan URL
+        if ($request->hasFile('url_image')) {
+            $imagePath = $request->file('url_image')->storeOnCloudinary('images');
+            $anime->url_image = $imagePath->getSecurePath();
+        }
+
+        $anime->save();
+
+        return redirect()->route('animes.index');
     }
 
-    // Menghapus data anime dari database
-    public function destroy($id)
+    public function destroy(Anime $anime)
     {
-        $anime = Anime::findOrFail($id);
         $anime->delete();
-
-        return redirect()->route('anime.index')->with('success', 'Anime berhasil dihapus');
+        return redirect()->route('animes.index');
     }
 }

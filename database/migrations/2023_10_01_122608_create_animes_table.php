@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
-            $table->string('url_image');
+            $table->string('url_image')->nullable(); // Ubah menjadi nullable
             $table->string('judul');
             $table->string('jepang');
             $table->string('slug');
@@ -23,12 +23,11 @@ return new class extends Migration
             $table->string('durasi');
             $table->string('studio');
             $table->decimal('rating', 10, 2);
-            $table->string('genre')->nullable();
             $table->string('status');
             $table->date('hari_rilis');
             $table->text('deskripsi');
-            $table->text('list_download_episode')->nullable();
-            $table->text('list_download_batch')->nullable();
+            $table->string('genre')->nullable(); // Ubah menjadi nullable
+            $table->json('download_links')->nullable(); // Tambah kolom download_links
             $table->timestamps();
         });
     }
