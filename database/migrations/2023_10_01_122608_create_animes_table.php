@@ -27,7 +27,8 @@ return new class extends Migration
             $table->date('hari_rilis');
             $table->text('deskripsi');
             $table->string('genre')->nullable(); // Ubah menjadi nullable
-            $table->json('download_links')->nullable(); // Tambah kolom download_links
+            $table->json('download_eps')->nullable(); // Tambah kolom download_links
+            $table->json('download_batch')->nullable(); // Tambah kolom download_links
             $table->timestamps();
         });
     }

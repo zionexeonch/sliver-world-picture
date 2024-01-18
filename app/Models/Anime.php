@@ -24,14 +24,14 @@ class Anime extends Model
         'status',
         'hari_rilis',
         'deskripsi',
-        'genres',
-        'list_download_episode',
+        'genre',
+        'list_download_eps',
         'list_download_batch',
     ];
 
     protected $casts = [
-        'list_download_episode' => 'json', // Tentukan tipe data
+        'list_download_eps' => 'json', // Tentukan tipe data
         'list_download_batch' => 'json', // Tentukan tipe data
-        'genres' => 'json', // Tentukan tipe data
+        'genre' => 'json', // Tentukan tipe data
     ];
 }

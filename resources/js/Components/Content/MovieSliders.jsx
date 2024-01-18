@@ -20,7 +20,7 @@ const isSliderMovie = (slidermovies) => {
                                 />
                                 <div className="absolute flex items-center space-x-1 top-2 right-1 lg:right-2 py-auto px-2 lg:py-2 lg:px-4 bg-slate-500 text-white rounded-lg">
                                     <svg
-                                        className="w-3 h-3 lg:w-4 lg:h-4 text-gray-300"
+                                        className="w-3 h-3 lg:w-4 lg:h-4 text-yellow-300"
                                         aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="currentColor"
